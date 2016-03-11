@@ -1,5 +1,5 @@
 README~!
-Head to getpit.com (subject to change) for the full documentation.
+Head to getpit.com (subject to change, incomplete) for the full documentation.
 
 MVCMS is a custom mvc framework augmented for the cms which is built using the mvc system. 
 
