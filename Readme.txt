@@ -7,7 +7,7 @@ MVCMS is licensed under the GNU open source liscense.
 
 This CMS is designed for developers who are familiar with mvc, it is not recommended for individuals with no web development experience! 
 
-The project currently contains the MVC CMS and a simple demonstration blog application written in MVC to show how to interface with the search and caching.
+The project currently contains the MVC CMS and a simple demonstration blog application written in MVC to show how to interface with the system search and caching.
 
 There are still notices and warnings which you may want resolve to make trouble shooting a more pleasant experience.
 
