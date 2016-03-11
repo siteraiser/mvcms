@@ -241,7 +241,7 @@ $(function(){ // this will be called when the DOM is ready
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with MVCMS.  If not, see <http://www.gnu.org/licenses/>.
+    along with MVCMS.  If not, see http://www.gnu.org/licenses/.
 		<hr />
 	  <p class="small">Nestable List - Copyright &copy; <a href="http://dbushell.com/">David Bushell</a></p>
 	  <p><strong><a href="https://github.com/dbushell/Nestable">Code on GitHub</a></strong></p>
