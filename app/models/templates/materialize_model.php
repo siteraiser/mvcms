@@ -1,5 +1,5 @@
 <?php /*
-Copyright © 2016 
+Copyright Â© 2016 
 	
 	This file is part of MVCMS.
 
@@ -39,7 +39,7 @@ class materialize_model extends requestHandler{
 			$img->setAttribute('class','responsive-img');		
 		}
 		
-		//fix videos
+		//fix videos, all Iframes are targeted, may need to add a check for url...
 		$frames = $doc->getElementsByTagName('iframe');	
 		$d=$doc->createElement('div');
 		$d->setAttribute('class','video-container no-controls'); 
