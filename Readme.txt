@@ -39,3 +39,6 @@ To develop an mvc application to be indexed in the site search you have 2 option
 1. Use the page table and supply an articleid and article with content and type (headline will be the title in the site search, content- searchable exact matches currently highlighed in results). In this case the sitemap and search can be used (.0 priority can be used to remove item from the sitemap).  
 
 2. Use an article only. Columns required are: articlename, published, type and content columns. (description is also used if supplied)
+
+© 2016 Carl Turechek
+Many libraries are used and dicumented MVCMS, those copyrights and licenses should be honored as well.
