@@ -1,5 +1,5 @@
 <?php /*
-Copyright © 2016 
+Copyright Â© 2016 
 	
 	This file is part of MVCMS.
 
@@ -375,13 +375,6 @@ $('body').on('click','button#add',function(event){
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with MVCMS.  If not, see <http://www.gnu.org/licenses/>.
-		<hr />
-		<p>
-			CKEditor - The text editor for Internet - <a href="http://ckeditor.com/">http://ckeditor.com</a>
-		</p>
-		<p id="copy">
-			Copyright &copy; 2003-2010, <a href="http://cksource.com/">CKSource</a> - Frederico
-			Knabben. All rights reserved.
-		</p>
+    along with MVCMS.  If not, see http://www.gnu.org/licenses/.
+	
 	</div>
