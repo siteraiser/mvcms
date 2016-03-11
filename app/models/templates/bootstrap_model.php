@@ -41,7 +41,7 @@ class bootstrap_model extends requestHandler{
 </div>
 */
 	
-			//fix videos
+			//fix videos, all Iframes are targeted, may need to add checks for if they are actual videos.
 		$frames = $doc->getElementsByTagName('iframe');	
 	
 
