@@ -7,6 +7,7 @@ MVCMS is licensed under the GNU open source liscense.
 
 This CMS is designed for developers who are familiar with mvc, it is not recommended for individuals with no web development experience!
 
+
 Limitations
 
 Only pdo databases are supported at this point, there is no abstraction layer.
@@ -41,4 +42,4 @@ To develop an mvc application to be indexed in the site search you have 2 option
 2. Use an article only. Columns required are: articlename, published, type and content columns. (description is also used if supplied)
 
 © 2016 Carl Turechek
-Many libraries are used and dicumented MVCMS, those copyrights and licenses should be honored as well.
+Many libraries are used and documented MVCMS, those copyrights and licenses should be honored as well.
