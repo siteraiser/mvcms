@@ -1,6 +1,6 @@
 <?php 
 /*
-Copyright © 2016 
+Copyright Â© 2016 
 	
 	This file is part of MVCMS.
 
@@ -22,7 +22,9 @@ class blog extends requestHandler{
 	//	= ' IN Blog';
 		$this->loadModel('blog/blog_model');	
 		$data['content'] = $this->blog_model->getAllByType();
-		
+		if(empty($data['article'])){
+			return;
+		}
 		$this->loadModel('pagination_model');
 		//Define pagination vars 
 		/* Material Design */
@@ -76,6 +78,9 @@ class blog extends requestHandler{
 	
 		$this->loadModel('blog/blog_model');	
 		$data['article'] = $this->blog_model->getArticle($link);
+		if($data['article'] == ''){
+			return;
+		}
 		//Let system know page output wants to be cached
 		//if($result['cache'] == 1){
 			$this->cache = true;
@@ -94,8 +99,11 @@ class blog extends requestHandler{
 	}
 	public function category($link,$category){
 		$this->loadModel('blog/blog_model');	
-	$data['content'] = $this->blog_model->getAllByType();
-		
+		$data['content'] = $this->blog_model->getAllByType();
+
+		if(empty($data['content'])){
+			return;
+		}
 		$this->loadModel('pagination_model');
 		//Define pagination vars 
 		/* Material Design */
