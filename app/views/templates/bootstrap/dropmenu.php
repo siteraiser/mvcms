@@ -1,0 +1,1 @@
+<div style="height:100px"><nav><div class='menustyled'><?php echo$content;?><?php echo $menu;?></div></nav></div>

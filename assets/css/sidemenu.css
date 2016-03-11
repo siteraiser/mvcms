@@ -1,0 +1,81 @@
+/* Loosely based on the example provided in the following link: http://www.thecssninja.com/demo/css_tree/ */
+.tree li a{
+	text-decoration: none;display: block;white-space: nowrap;
+	position:relative;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+}
+ol.tree{margin: 0 0 0 0;padding:0;}
+
+.tree li { 
+	position: relative; 		
+	list-style: none;
+	
+}
+li.file{
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	-o-text-overflow: ellipsis !important;
+	-webkit-text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+	color: #aaa;
+	}
+		li.file a
+		{	
+			color: #fff;		
+		}
+
+		li.file a:hover {text-decoration:underline;}
+		li label a:hover {text-decoration:underline;}
+		
+		
+	li input
+	{
+		position: absolute;
+
+		opacity: 0;
+		z-index: 2;
+		cursor: pointer;
+		height: 1em;
+		width: 1em;
+		
+	}
+		li input + ol
+		{
+			background: url(/images/plus.png) 40px 0 no-repeat;
+			 background-image: 
+    			linear-gradient(transparent, transparent),
+    			url(/images/plus.svg);
+			margin: -0.938em 0 0 -44px; 
+			height: 1em;
+		}
+		li input + ol > li { display: none; margin-left: -14px !important; padding-left: 1px; }
+	li label
+	{
+		cursor: pointer;
+		display: block;
+		padding-left: 18px;
+		white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	font-weight:bold;color:#fff;width:auto;
+	
+	}
+
+	li input:checked + ol
+	{
+		background: url(/images/minus.png) 40px 5px no-repeat;
+		 background-image: linear-gradient(transparent, transparent),url(/images/minus.svg);
+		margin: -1.25em 0 0 -44px; 
+		padding: 1.563em 0 0 80px;
+		height: auto;
+	}
+		li input:checked + ol > li { display: block;}
+		li input:checked + ol > li:last-child { margin: 0 0 0 0;  padding-bottom:0em; }
+
+
+

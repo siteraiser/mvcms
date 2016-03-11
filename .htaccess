@@ -1,0 +1,90 @@
+#RewriteOptions inherit
+#Options +FollowSymLinks
+
+RewriteEngine On
+
+#disallow directory access
+Options All -Indexes
+
+#prevent folder listing
+IndexIgnore *
+
+#prevent access to any file:
+#<FilesMatch "^.*$">
+#Order Allow,Deny
+#Deny from all
+#</filesMatch> 
+
+
+#Rewrite to www version
+#RewriteCond %{REQUEST_URI} !\.(gif|jpg|png|css|js|ico)
+#RewriteCond %{HTTP_HOST} ^example.com
+#RewriteRule (.*) http://www.example.com/$1 [R=301,L]
+
+Options +FollowSymLinks
+
+RewriteEngine on
+#DirectorySlash off
+RewriteBase /
+
+RewriteCond $1 !^(index\.php|cached|robots\.txt|sitemap\.xml|assets|images|filemanager_in_ckeditor|userfiles)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+#[L,PT,NS] no sub requests, images are seperate not subrequests
+
+#-Hack to allow fonts, disable if not using
+
+#<FilesMatch "\.(ttf|ttc|otf|eot|woff)$">
+#    <IfModule mod_headers.c>
+#        Header set Access-Control-Allow-Origin "*"
+#    </IfModule>
+#</FilesMatch>
+
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+#<Directory "/your-server-root/manual"> -SetOutputFilter DEFLATE- http://httpd.apache.org/docs/current/mod/mod_deflate.html
+#AddOutputFilterByType DEFLATE image/svg+xml text/html text/plain text/xml text/css text/javascript application/javascript 
+#</Directory>Uncomment above line for gzip on live site
+
+
+FileETag MTime Size
+
+# If-Modified-Since (if php is not installed as cgi then comment lines below) - not required for mvcms caching
+#RewriteRule .* - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
+#RewriteRule .* - [E=HTTP_IF_NONE_MATCH:%{HTTP:If-None-Match}]
+<IfModule mod_expires.c>
+
+# Enable expirations
+ExpiresActive On
+
+# Default directive
+ExpiresDefault "access plus 1 week"
+
+# My favicon
+ExpiresByType image/x-icon "access plus 1 year”
+
+# Images
+ExpiresByType image/gif "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/jpg "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/svg+xml "access plus 1 month"
+# CSS
+ExpiresByType text/css "access 1 week”
+
+# Javascript
+ExpiresByType application/javascript "access plus 1 week"
+ExpiresByType application/x-javascript "access plus 1 week"
+
+#  ExpiresByType application/json          "access plus 0 seconds"
+#  ExpiresByType application/xml           "access plus 0 seconds"
+#  ExpiresByType text/xml                  "access plus 0 seconds"
+
+
+</IfModule>
+
+ErrorDocument 404 /404.html
+
+

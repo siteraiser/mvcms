@@ -1,0 +1,2 @@
+<!-- paralax close -->
+</div>
