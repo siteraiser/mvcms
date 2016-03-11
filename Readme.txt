@@ -20,6 +20,8 @@ The site search only supports the English language due to the need for a differe
 
 Passwords are stored in plain text by default, this should be remedied by a security expert near you.
 
+To do: The automatic responsive videos will need to have a check to ensure that they are videos.
+
 
 Highlights
 
