@@ -42,4 +42,4 @@ To develop an mvc application to be indexed in the site search you have 2 option
 2. Use an article only. Columns required are: articlename, published, type and content columns. (description is also used if supplied)
 
 © 2016 Carl Turechek
-Many libraries are used and documented MVCMS, those copyrights and licenses should be honored as well.
+Many libraries are used and documented in MVCMS, those copyrights and licenses should be honored as well.
