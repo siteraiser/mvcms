@@ -1,5 +1,5 @@
 <?php 
-/*	Copyright © 2016 
+/*	Copyright Â© 2016 
 	
 	This file is part of MVCMS.
 
@@ -199,14 +199,14 @@ abstract class helpers{
 	}
 	public function removeSpaces($string){
 	 	$search = array('~>\s*\n\s*<~','/(\s)+/s');	 
-	$replace = array('><','\\1'); 
+		$replace = array('><','\\1'); 
 		
 		return preg_replace($search, $replace, $string);
 	}
 
 	public function minimize($string){
 
-		$string = preg_replace('@(?<![http|https]:)//.+?(?=\n|\r|$)@', '', $string);//Singleline JS comments. Maybe cause issues.
+		//$string = preg_replace('@(?<![http|https]:)//.+?(?=\n|\r|$)@', '', $string);//Singleline JS comments. Removes all //comments from text or scripts...Needs works! 
 		$string = preg_replace('/<!--(?!<!)[^\[>].*?-->/s', '', $string);
 		$string = preg_replace('!/\*.*?\*/!s', '', $string); // removes /* comments */
 		$string = $this->removeSpaces($string);
