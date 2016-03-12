@@ -1,5 +1,5 @@
 <?php /*
-Copyright © 2016 
+Copyright Â© 2016 
 	
 	This file is part of MVCMS.
 
@@ -244,7 +244,7 @@ class siteAdmin extends requestHandler{
 		}
 		if (isset($this->url_segments[2]) && $this->url_segments[2] == 'add'){			
 			$data["add"]=true;
-			$data["title"]="Add Pages";
+			$data["title"]="Add Articles";
 		}
 
 		if(isset($this->url_segments[2]) && $this->url_segments[2] == 'edit'){	
@@ -254,7 +254,7 @@ class siteAdmin extends requestHandler{
 				$data["articleid"]=$this->content_model->insert();	
 				$this->search_model->updateSearch();				
 			}else if($_POST["update"] == "1"){
-				$data["title"]="Update Pages";
+				$data["title"]="Update Articles";
 				$data['messages'] ='update id:'.$_POST["id"] .'<br>';
 				$data['messages'].= $this->content_model->update();
 				$this->search_model->updateSearch();
