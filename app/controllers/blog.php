@@ -15,7 +15,7 @@ Copyright © 2016
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with MVCMS.  If not, see <http://www.gnu.org/licenses/>.
+    along with PHP-MVCMS.  If not, see <http://www.gnu.org/licenses/>.
 */	
 class blog extends requestHandler{
 	public function index($link){
