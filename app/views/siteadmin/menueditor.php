@@ -228,20 +228,20 @@ $(function(){ // this will be called when the DOM is ready
 
 
 <div id="footer">
-	  MVCMS - Copyright &copy; 2016 - Carl Turechek
+	  PHP-MVCMS - Copyright &copy; 2016 - Carl Turechek
   	
-	 MVCMS is free software: you can redistribute it and/or modify
+	 PHP-MVCMS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    MVCMS is distributed in the hope that it will be useful,
+    PHP-MVCMS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with MVCMS.  If not, see http://www.gnu.org/licenses/.
+    along with PHP-MVCMS.  If not, see http://www.gnu.org/licenses/.
 		<hr />
 	  <p class="small">Nestable List - Copyright &copy; <a href="http://dbushell.com/">David Bushell</a></p>
 	  <p><strong><a href="https://github.com/dbushell/Nestable">Code on GitHub</a></strong></p>
