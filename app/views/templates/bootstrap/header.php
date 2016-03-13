@@ -10,6 +10,19 @@
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+
+var foo1 = (('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch)) ? 'touchstart' : 'click';
+if(foo1 != 'click'){
+$(document).on('click touchstart',function(event){
+    if (!$(event.target).is('ul#nav a')){
+        $('ul#nav ul').hide();
+    }else{
+         $('ul#nav ul').show();  
+    }
+}); 
+}
+</script>
 <style>
 .responsive{height:auto; max-width:100%;}
 
