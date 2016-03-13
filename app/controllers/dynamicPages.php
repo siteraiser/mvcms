@@ -67,6 +67,8 @@ foreach($sorted as $rowkey => $article){
 			$aggregate='';
 			if($page['aggregate'] == 'aggregate'){					
 				$aggregate='aggregate';			
+			}else if($page['aggregate'] == 'agg-pos'){
+				$aggregate='agg-pos';			
 			}else{
 				$aggregate='single';
 			}
@@ -103,7 +105,26 @@ foreach($loadViews as $key => $value){
 			if(isset($value2['menu']) || $menutemp !='' ){$content['menu'] = $menutemp.$this->$templatemodel->getMenu($value2['menu'],$value2['menutype']); }//getMenu returns null if no menu is assigned			
 			
 			$this->addView('templates/'.key($value),$content);
-			$temp;$menutemp='';//Done aggregating this view, this occurance
+			$temp='';$menutemp='';//Done aggregating this view, this occurance
+	
+
+		}else if($value2['type'] == 'agg-pos' AND $loadViews[$key + 1][$key2]['type'] == 'agg-pos' AND key($value) == key($loadViews[$key + 1])){
+			$temp[]= $this->$templatemodel->respImgs($value2['content']);
+			if(isset($value2['menu'])){ $menutemp[]=  $this->$templatemodel->getMenu($value2['menu'],$value2['menutype']); }
+			
+		}else if($value2['type'] == 'agg-pos' AND $loadViews[$key - 1][$key2]['type'] == 'agg-pos' AND key($value) == key($loadViews[$key - 1])		
+		AND $value2['type'] == 'agg-pos' AND ($loadViews[$key + 1][$key2]['type'] !== 'agg-pos' OR key($value) !== key($loadViews[$key + 1]))){
+			$temp[]=$value2['content'];
+			$content['content']=$temp;
+			if(isset($value2['meta'])){	$content['meta'] = $value2['meta'];	}
+			if(isset($value2['title'])){ $content['title'] = $value2['title']; }
+			
+			if(isset($value2['menu']) || $menutemp !='' ){
+				$menutemp[]=$this->$templatemodel->getMenu($value2['menu'],$value2['menutype']);
+				$content['menu'] = $menutemp; }//getMenu returns null if no menu is assigned			
+			
+			$this->addView('templates/'.key($value),$content);
+			$temp='';$menutemp='';//Done aggregating this view, this occurance
 		}else{
 			$content['content'] = $this->$templatemodel->respImgs($value2['content']);	
 			if(isset($value2['meta'])){	$content['meta'] = $value2['meta'];	}
