@@ -1,7 +1,6 @@
  
 <!-- start main menu -->
  <div class="col-md-2">
-	<?php /*	if($this->session->userdata('admin_logged_in')): */?>
 
 	  
 	  <?php echo$content;?><?php echo $menu;?>
