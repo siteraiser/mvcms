@@ -1,4 +1,7 @@
 README~!
+
+The dynamicsPages controller and editpage view were just updated to allow multiple positions in the template views.
+
 Head to getpit.com (subject to change, incomplete) for the full documentation.
 
 PHP-MVCMS is a custom mvc framework augmented for the cms which is built using the mvc system. 
