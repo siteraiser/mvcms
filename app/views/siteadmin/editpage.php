@@ -321,7 +321,7 @@ $(document).ready(function(){
 if( articles != null){
 
 	articles.forEach(function(article) {
-		$('ul#included').append('<li class="ui-state-default remove"><a class="btn btn-danger">' + article.name + '</a><a class="btn btn-default" href="/siteadmin/content/edit?article=' + article.id + '">view</a><input type="hidden" name="articleid[]" value="' + article.id + '"><select id="selectview' + ++i +'" name="view[]"> <?php foreach($views as $value)echo"<option value=".$value.">$value</option>"?></select><select id="selectagg' + i +'" name="aggregate[]"><option value="separate">separate</option><option value="aggregate">aggregate</option></select></li>');
+		$('ul#included').append('<li class="ui-state-default remove"><a class="btn btn-danger">' + article.name + '</a><a class="btn btn-default" href="/siteadmin/content/edit?article=' + article.id + '">view</a><input type="hidden" name="articleid[]" value="' + article.id + '"><select id="selectview' + ++i +'" name="view[]"> <?php foreach($views as $value)echo"<option value=".$value.">$value</option>"?></select><select id="selectagg' + i +'" name="aggregate[]"><option value="separate">separate</option><option value="aggregate">aggregate</option><option value="agg-pos">agg-pos</option></select></li>');
 $("ul#included select#selectview"+ i).find('option[value="' + article.views + '"]').attr("selected", "selected");
 $("ul#included select#selectagg"+ i).find('option[value="' + article.aggregate + '"]').attr("selected", "selected");
 	});
@@ -344,7 +344,7 @@ $('body').on('click','button#add',function(event){
 		element.parent().find('input[name="search"]').val("");
 		
 	//	if( $.inArray( currentSuggestion.value, arr) == -1 ){	 
-			$('ul#included').append('<li class="ui-state-default remove"><a class="btn btn-danger">' + currentSuggestion.value + '</a><a class="btn btn-default" href="/siteadmin/content/edit?article=' + currentSuggestion.data + '">view</a><input type="hidden" name="articleid[]" value="' + currentSuggestion.data + '"><select id="selectview' + ++i +'" name="view[]"> <?php foreach($views as $value)echo"<option value=".$value.">$value</option>"?></select><select id="selectagg' + i +'" name="aggregate[]"><option value="separate">separate</option><option value="aggregate">aggregate</option></select></li>');
+			$('ul#included').append('<li class="ui-state-default remove"><a class="btn btn-danger">' + currentSuggestion.value + '</a><a class="btn btn-default" href="/siteadmin/content/edit?article=' + currentSuggestion.data + '">view</a><input type="hidden" name="articleid[]" value="' + currentSuggestion.data + '"><select id="selectview' + ++i +'" name="view[]"> <?php foreach($views as $value)echo"<option value=".$value.">$value</option>"?></select><select id="selectagg' + i +'" name="aggregate[]"><option value="separate">separate</option><option value="aggregate">aggregate</option><option value="agg-pos">agg-pos</option></select></li>');
 		//}
 	}
 	//console.log(name);
