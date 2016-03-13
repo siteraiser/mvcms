@@ -1,19 +1,19 @@
-<?php /*	Copyright © 2016 
+<?php /*	Copyright Â© 2016 
 	
-	This file is part of MVCMS.
+	This file is part of PHP-MVCMS.
 
-    MVCMS is free software: you can redistribute it and/or modify
+    PHP-MVCMS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    MVCMS is distributed in the hope that it will be useful,
+    PHP-MVCMS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with MVCMS.  If not, see <http://www.gnu.org/licenses/>.
+    along with PHP-MVCMS.  If not, see <http://www.gnu.org/licenses/>.
 */
 ?>
 <div class="container-fluid">
@@ -69,26 +69,19 @@ Active: <input type="checkbox" name="status" <?php echo (@$site['status'] == 1?'
  
  ?>
 	<div id="footer">
-	  MVCMS - Copyright &copy; 2016 - Carl Turechek
+	  PHP-MVCMS - Copyright &copy; 2016 - Carl Turechek
   	
-	 MVCMS is free software: you can redistribute it and/or modify
+	 PHP-MVCMS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    MVCMS is distributed in the hope that it will be useful,
+    PHP-MVCMS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with MVCMS.  If not, see <http://www.gnu.org/licenses/>.
-		<hr />
-		<p>
-			CKEditor - The text editor for Internet - <a href="http://ckeditor.com/">http://ckeditor.com</a>
-		</p>
-		<p id="copy">
-			Copyright &copy; 2003-2010, <a href="http://cksource.com/">CKSource</a> - Frederico
-			Knabben. All rights reserved.
-		</p>
+    along with PHP-MVCMS.  If not, see <http://www.gnu.org/licenses/>.
+	
 	</div>
