@@ -154,3 +154,27 @@ check();
  //echo '<pre>'.htmlspecialchars(print_r($rows, true)).'</pre>';
  
  ?>
+<div id="footer">
+	  PHP-MVCMS - Copyright &copy; 2016 - Carl Turechek
+  	
+	 PHP-MVCMS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    PHP-MVCMS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with PHP-MVCMS.  If not, see http://www.gnu.org/licenses/.
+		<hr />
+		<p>
+			CKEditor - The text editor for Internet - <a href="http://ckeditor.com/">http://ckeditor.com</a>
+		</p>
+		<p id="copy">
+			Copyright &copy; 2003-2010, <a href="http://cksource.com/">CKSource</a> - Frederico
+			Knabben. All rights reserved.
+		</p>
+	</div>
