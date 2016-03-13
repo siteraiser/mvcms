@@ -1,6 +1,6 @@
 README~!
 
-The dynamicsPages controller and editpage view were just updated to allow multiple positions in the template views.
+3-13-2016 - The dynamicsPages controller and editpage view were just updated to allow multiple positions in the template views.
 
 Head to getpit.com (subject to change, incomplete) for the full documentation.
 
