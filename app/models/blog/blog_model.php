@@ -79,8 +79,8 @@ class blog_model extends requestHandler{
 			$timestamp = $date->format('Y-m-d H:i:s');
 			$link = $this->urlSlug('blog/'.$_POST['category'].'/'.$_POST['articlename']);
 			$link = $this->uniqueSlug($link,'content');
-			$sqlArray = array($_POST['type'],$user->getId(),$link,$_POST['articlename'],$_POST['description'],$_POST['content'],$_POST['category'],isset($_POST['published']) ? 1 : 0);
-			$query="INSERT INTO content (`type`,`user` ,`link` ,`articlename`,`description`,`content`,`category`,`published` ) VALUES ( ?,?,?,?,?,?,?,? )";
+			$sqlArray = array($_POST['type'],$user->getId(),$link,$_POST['articlename'],$_POST['description'],$_POST['content'],$_POST['category'],isset($_POST['published']) ? 1 : 0,$timestamp,$timestamp);
+			$query="INSERT INTO content (`type`,`user` ,`link` ,`articlename`,`description`,`content`,`category`,`published`,`date`,`lastupdate` ) VALUES ( ?,?,?,?,?,?,?,?,?,? )";
 			$stmt=$this->pdo->prepare($query);
 			$stmt->execute($sqlArray);			 
 			return $this->pdo->lastInsertId('id');
