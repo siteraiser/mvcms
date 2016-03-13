@@ -22,7 +22,7 @@ class blog extends requestHandler{
 	//	= ' IN Blog';
 		$this->loadModel('blog/blog_model');	
 		$data['content'] = $this->blog_model->getAllByType();
-		if(empty($data['article'])){
+		if(empty($data['content'])){
 			return;
 		}
 		$this->loadModel('pagination_model');
