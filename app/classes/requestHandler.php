@@ -65,15 +65,24 @@ abstract class helpers{
 				$trans[]=$value;
 			}
 		}
+		
 		$controller_method=[];
-		if(isset($routes[$i]['controller'])){
-			$split = explode('$1', $routes[$i]['controller']);
-			$controller_method = $split[0];
+		if(isset($routes[$i]['controller'])){			
+			$first = strpos($routes[$i]['controller'], '$');
+			$controller_method = substr($routes[$i]['controller'], 0, $first); 
 			$controller_method = explode('/',$controller_method);
 		}
 
 		if(isset($trans)){
-			$controller_method[2]=$trans;
+			
+			$args = substr($routes[$i]['controller'],  $first, strlen($routes[$i]['controller']));
+				$argsOrder = explode('/',$args);
+				$i=0;
+				foreach($argsOrder as $value){
+					$combined[] = @$trans[substr($value,1) - 1]; 
+				}
+				//ksort($combined);
+			$controller_method[2]=$combined;
 		}
 		return $controller_method;
 	}
@@ -199,14 +208,14 @@ abstract class helpers{
 	}
 	public function removeSpaces($string){
 	 	$search = array('~>\s*\n\s*<~','/(\s)+/s');	 
-		$replace = array('><','\\1'); 
+	$replace = array('><','\\1'); 
 		
 		return preg_replace($search, $replace, $string);
 	}
 
 	public function minimize($string){
 
-		//$string = preg_replace('@(?<![http|https]:)//.+?(?=\n|\r|$)@', '', $string);//Singleline JS comments. Removes all //comments from text or scripts...Needs works! 
+	//	$string = preg_replace('@(?<![http|https]:)//.+?(?=\n|\r|$)@', '', $string);//Singleline JS comments. Maybe cause issues.
 		$string = preg_replace('/<!--(?!<!)[^\[>].*?-->/s', '', $string);
 		$string = preg_replace('!/\*.*?\*/!s', '', $string); // removes /* comments */
 		$string = $this->removeSpaces($string);
@@ -323,6 +332,7 @@ class requestHandler extends helpers{
 		if(isset($controller_method[2])){	
 			$params = $controller_method[2];
 		}
+	
 		array_unshift($params, $this->path);
 		///Routed --
 
