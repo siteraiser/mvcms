@@ -1,16 +1,20 @@
-<?php /* Copyright © 2016 
+<?php /*
+Copyright © 2016 
 	
-	This file is part of PHP-MVCMS.
-    PHP-MVCMS is free software: you can redistribute it and/or modify
+	This file is part of MVCMS.
+
+    MVCMS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    PHP-MVCMS is distributed in the hope that it will be useful,
-    You should have received a copy of the GNU General Public License
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
+
+    MVCMS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-   along with PHP-MVCMS.  If not, see <http://www.gnu.org/licenses/>.
+
+    You should have received a copy of the GNU General Public License
+    along with MVCMS.  If not, see <http://www.gnu.org/licenses/>.
 */	
 class materialize_model extends requestHandler{
 	public function respImgs($html){
@@ -35,7 +39,7 @@ class materialize_model extends requestHandler{
 			$img->setAttribute('class','responsive-img');		
 		}
 		
-		//fix videos, all Iframes are targeted, may need to add a check for url...
+		//fix videos
 		$frames = $doc->getElementsByTagName('iframe');	
 		$d=$doc->createElement('div');
 		$d->setAttribute('class','video-container no-controls'); 
@@ -141,13 +145,13 @@ class materialize_model extends requestHandler{
 			}else{
 				$linsert = '';$label='';$label_close='';
 				if(!$object->skip){
-					$linsert = " class='file'";
+					$linsert = "file";
 				}else{
 					$label="<label for='".$object->name."'>";
 					$label_close="</label><input type='checkbox' id='".$object->name."' />";					
 				}
 				
-				$this->out.= "<li class='waves-effect waves-light'".$linsert.">".$label.$href.strip_tags($object->name,'')."$href_close$label_close";	
+				$this->out.= "<li class='waves-effect waves-light ".$linsert."'>".$label.$href.strip_tags($object->name,'')."$href_close$label_close";	
 			}
 			if(isset($object->children)){
 				 $this->out.= '<ol>';
