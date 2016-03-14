@@ -19,7 +19,8 @@ Copyright © 2016
 */	
 class blog extends requestHandler{
 	public function index($link){
-	//	= ' IN Blog';
+		$data['title']='Blog';
+		$data['meta']='<meta name="description" content="Find the latest news here.">';
 		$this->loadModel('blog/blog_model');	
 		$data['content'] = $this->blog_model->getAllByType();
 		if(empty($data['content'])){
@@ -68,7 +69,7 @@ class blog extends requestHandler{
 		$data['sidemenu'] = $this->materialize_model->getMenu('main menu','sidemenu');
 		$data['dropmenu'] = $this->materialize_model->getMenu('main menu','dropmenu');		
 				
-		$this->addView('templates/materialize/header');
+		$this->addView('templates/materialize/header',$data);
 		$this->addView('blog/nav',$data);
 		$this->addView('blog/list',$data);
 		$this->addView('templates/materialize/footer');
@@ -81,6 +82,8 @@ class blog extends requestHandler{
 		if($data['article'] == ''){
 			return;
 		}
+		$data['title']=$data['article']['articlename'];
+		$data['meta']='<meta name="description" content="'.$data['article']['description'].'">';
 		//Let system know page output wants to be cached
 		//if($result['cache'] == 1){
 			$this->cache = true;
@@ -88,11 +91,15 @@ class blog extends requestHandler{
 		//if($result['minify'] == 1){
 			$this->minify = true;
 		//}	
+		
 		$this->loadModel('templates/materialize_model');
 		$data['sidemenu'] = $this->materialize_model->getMenu('main menu','sidemenu');
 		$data['dropmenu'] = $this->materialize_model->getMenu('main menu','dropmenu');	
+
+
+
 		
-		$this->addView('/templates/materialize/header');
+		$this->addView('/templates/materialize/header',$data);
 		$this->addView('blog/nav',$data);
 		$this->addView('blog/article',$data);
 		$this->addView('/templates/materialize/footer');
@@ -104,6 +111,10 @@ class blog extends requestHandler{
 		if(empty($data['content'])){
 			return;
 		}
+		
+		$data['title']=ucfirst ($data['content'][0]['category']);
+		$data['meta']='<meta name="description" content="'.ucfirst ($data['content'][0]['category']).' category">';
+		
 		$this->loadModel('pagination_model');
 		//Define pagination vars 
 		/* Material Design */
@@ -147,7 +158,7 @@ class blog extends requestHandler{
 		$data['sidemenu'] = $this->materialize_model->getMenu('main menu','sidemenu');
 		$data['dropmenu'] = $this->materialize_model->getMenu('main menu','dropmenu');		
 		
-		$this->addView('/templates/materialize/header');
+		$this->addView('/templates/materialize/header',$data);
 		$this->addView('blog/nav',$data);
 		$this->addView('blog/list',$data);
 		$this->addView('/templates/materialize/footer');
@@ -330,8 +341,13 @@ class blog extends requestHandler{
 		if($_POST["update"] == "0"){
 			$articleid=$this->blog_model->insertArticle($user);	
 			if($articleid > 0){
-				$this->search_model->updateSearch();				
-				header("Location: ".$this->base_url."blog/admin/edit?article=".$articleid);
+				$this->search_model->updateSearch(); 	
+				error_reporting(E_ALL | E_WARNING | E_NOTICE);
+ini_set('display_errors', TRUE);
+
+
+flush();	
+				header("Location:".$this->base_url."blog/admin/edit?article=".$articleid);
 				exit;
 			}
 		}
