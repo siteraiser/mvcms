@@ -74,7 +74,7 @@ class blog extends requestHandler{
 		$this->addView('blog/list',$data);
 		$this->addView('templates/materialize/footer');
 	}
-	public function article($link,$category,$article){
+	public function article($link,$category='',$article=''){
 	//	= ' IN Blog';
 	
 		$this->loadModel('blog/blog_model');	
