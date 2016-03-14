@@ -1,5 +1,5 @@
 README~!
-
+3-14-2016 - Some additional changes to routing in the requestHandler file were made to add argument ordering.
 3-13-2016 - The dynamicPages controller and editpage view were just updated to allow multiple positions in the template views.
 
 Head to getpit.com (subject to change, incomplete) for the full documentation.
