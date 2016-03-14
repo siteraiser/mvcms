@@ -69,6 +69,9 @@ abstract class helpers{
 		$controller_method=[];
 		if(isset($routes[$i]['controller'])){			
 			$first = strpos($routes[$i]['controller'], '$');
+			if($first==0){
+			$first = strlen($routes[$i]['controller']);
+			}
 			$controller_method = substr($routes[$i]['controller'], 0, $first); 
 			$controller_method = explode('/',$controller_method);
 		}
