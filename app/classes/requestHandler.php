@@ -111,7 +111,7 @@ abstract class helpers{
 	public function loadDB() {
 
 			//add pdo 
-			include('app/system/config/db.inc.php');//include once fails due to unsetting of dynpages controller		
+			include('app/system/config/db.inc.php');		
 			if(!is_object($this->pdo) && $xml->database !=''){
 				try {
 					$this->pdo = new PDO('mysql:host=localhost;dbname='.$xml->database, $xml->username, $xml->password);    					
