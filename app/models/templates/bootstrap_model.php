@@ -1,19 +1,22 @@
-<?php
-/* Copyright © 2016 
+<?php 
+/*
+Copyright © 2016 
 	
 	This file is part of PHP-MVCMS.
+
     PHP-MVCMS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
+
     PHP-MVCMS is distributed in the hope that it will be useful,
-    You should have received a copy of the GNU General Public License
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-   along with PHP-MVCMS.  If not, see <http://www.gnu.org/licenses/>.
-*/	
 
+    You should have received a copy of the GNU General Public License
+    along with PHP-MVCMS.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 class bootstrap_model extends requestHandler{
 	public function respImgs($html){
@@ -56,7 +59,7 @@ class bootstrap_model extends requestHandler{
 </div>
 */
 	
-			//fix videos, all Iframes are targeted, may need to add checks for if they are actual videos.
+			//fix videos
 		$frames = $doc->getElementsByTagName('iframe');	
 	
 
@@ -196,11 +199,11 @@ class bootstrap_model extends requestHandler{
 
 			$href='';
 			if($object->url != ''){
-				$href='<a href="'.$object->url.'">'.$object->name.'</a>';
+				$href='<a '.$this->checkedurl($object->url, 'class="active"').' href="'.$object->url.'">'.$object->name.'</a>';
 			}else{
 				$href='<span>'.$object->name.'</span>';
 			}	
-			$this->out.= '<li '.$this->checkedurl($object->url, 'class="active"').'>'.$href.(isset($object->children) && !$object->skip?'<img alt="more" height="16" class="arrow" src="/images/arrow.png"/>':'');
+			$this->out.= '<li>'.$href.(isset($object->children) && !$object->skip?'<img alt="more" height="16" class="arrow" src="/images/arrow.png"/>':'');
 
 			if(isset($object->children)){
 				$this->out.= '<ul>';
