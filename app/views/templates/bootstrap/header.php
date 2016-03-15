@@ -144,7 +144,7 @@ ul#nav li, ul#nav li a, ul#nav li span{
 }
 
 /* main level link hover */
-ul li a.select, #nav li:hover > a {
+ul li a.active, #nav li:hover > a {
 	color: #aad;
 }
 
@@ -163,7 +163,9 @@ background: #004 !important;
 #nav li:hover{
 	background: #004;
 }
-
+ul#nav li a.active{
+    background: #004;
+}
 
 /* other */
 .search-bar-inpt,.search-bar-grp {
