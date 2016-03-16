@@ -44,6 +44,7 @@ function DeleteFolder( $resourceType, $currentFolder )
 {	
 	function deleteDir($path)
 	{
+		/* Nice function for deleting a dir by Matt Connolly, http://stackoverflow.com/questions/3349753/delete-directory-with-files-in-it*/
 		return !empty($path) && is_file($path) ?
 			@unlink($path) :
 			(array_reduce(glob($path.'/*'), function ($r, $i) { return $r && deleteDir($i); }, TRUE)) && @rmdir($path);
