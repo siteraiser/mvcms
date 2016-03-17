@@ -640,7 +640,7 @@ $pageconfig['last_close']="</li>";
 		$data["add"]=false;	
 
 			if($_POST["submit"] == "Create"){
-				var_dump($_POST);
+			//	var_dump($_POST);
 				$data["articleid"]=$this->pages_model->insert();	
 				$this->search_model->updateSearch();				
 			}else if($_POST["submit"] == "Update"){
