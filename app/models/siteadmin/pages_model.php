@@ -66,7 +66,7 @@ class pages_model extends requestHandler{
 		foreach($changes as $orig => $new){
 			//$orig = '/products-and-services/web-design/design-demos';
 		
-			echo$query="SELECT * FROM menus WHERE data LIKE '%:\"".$orig."\";s:%'";
+			$query="SELECT * FROM menus WHERE data LIKE '%:\"".$orig."\";s:%'";
 			$stmt=$this->pdo->prepare($query);// AND type like '%:\"".'linked'."\";s:%'
 			$stmt->execute(array());
 			$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
