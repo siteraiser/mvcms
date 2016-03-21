@@ -65,6 +65,7 @@ class bootstrap_model extends requestHandler{
 
 		foreach ($frames AS $frame) {
 			$d=$doc->createElement('div');
+				$frame->setAttribute('class','embed-responsive-item');
 				$width = $frame->getAttribute('width'); 
 				$height = $frame->getAttribute('height'); 
 				$ratio = ($width / $height);
