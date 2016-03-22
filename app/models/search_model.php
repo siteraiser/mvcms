@@ -344,7 +344,7 @@ class search_model extends requestHandler{
 			//echo "match found 4: $closest\n";
 			return array('closest'=>$closest,'shortest'=>$shortest);
 		} 
-		if(strlen($input) > 6 && $shortest < 6){
+		if(strlen($input) > 6 && $shortest < 5){
 		//echo "match found 6: $closest\n";
 			return array('closest'=>$closest,'shortest'=>$shortest);
 		}
