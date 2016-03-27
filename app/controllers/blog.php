@@ -22,10 +22,8 @@ class blog extends requestHandler{
 		$data['title']='Blog';
 		$data['meta']='<meta name="description" content="Find the latest news here.">';
 		$this->loadModel('blog/blog_model');	
-		$data['content'] = $this->blog_model->getAllByType();
-		if(empty($data['content'])){
-			return;
-		}
+	//	$data['content'] = $this->blog_model->getAllByType();
+
 		$this->loadModel('pagination_model');
 		//Define pagination vars 
 		/* Material Design */
@@ -60,7 +58,9 @@ class blog extends requestHandler{
 		$pageconfig['firstlast']=true;
 				/*Paginate!*/
 		$this->pagination_model->paginate($pageconfig);
-
+		if($this->pagination_model->total_records == 0){
+			return;
+		}
 		$data['results']=$this->pagination_model->results;
 		$data['currentpage']=$this->pagination_model->page_links;
 		$data['totalrecords']=$this->pagination_model->total_records;
