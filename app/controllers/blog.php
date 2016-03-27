@@ -47,7 +47,7 @@ class blog extends requestHandler{
 		$pageconfig['last_close']="</li>";	
 					
 		//Get current page assignments		
-		$pageconfig['query']="SELECT * FROM content WHERE type='blog' OR type='code'";
+		$pageconfig['query']="SELECT * FROM content WHERE (type='blog' OR type='code') AND published = 1 ORDER BY date DESC";
 		$pageconfig['query_array'];
 		$pageconfig['link_url']= $link;
 		$pageconfig['link_params']=''; 
