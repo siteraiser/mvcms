@@ -106,11 +106,9 @@ class blog extends requestHandler{
 	}
 	public function category($link,$category){
 		$this->loadModel('blog/blog_model');	
-		$data['content'] = $this->blog_model->getAllByType();
+	//	$data['content'] = $this->blog_model->getAllByType();
 
-		if(empty($data['content'])){
-			return;
-		}
+	
 		
 		$data['title']=ucfirst ($data['content'][0]['category']);
 		$data['meta']='<meta name="description" content="'.ucfirst ($data['content'][0]['category']).' category">';
@@ -138,7 +136,7 @@ class blog extends requestHandler{
 		$pageconfig['last_close']="</li>";	
 			
 		//Get current page assignments		
-		$pageconfig['query']="SELECT * FROM content WHERE (type='blog' OR type='code') AND category =?";
+		$pageconfig['query']="SELECT * FROM content WHERE (type='blog' OR type='code') AND category =? AND published = 1 ORDER BY date DESC";
 		$pageconfig['query_array']=array($category);
 		$pageconfig['link_url']= $this->base_url.$link;
 		$pageconfig['link_params']=''; 
@@ -149,7 +147,9 @@ class blog extends requestHandler{
 		$pageconfig['firstlast']=true;
 				/*Paginate!*/
 		$this->pagination_model->paginate($pageconfig);
-
+		if(empty($data['content'])){
+			return;
+		}
 		$data['results']=$this->pagination_model->results;
 		$data['currentpage']=$this->pagination_model->page_links;
 		$data['totalrecords']=$this->pagination_model->total_records;
