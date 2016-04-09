@@ -30,7 +30,7 @@ class blog_model extends requestHandler{
 	}
 
 
-/*	for loading page and article, not being used in this demo. Site map will have to be managed separately with article only apps.
+/*	for loading pages and articles of a certain type, not being used in this demo. Site map will have to be managed separately with article only apps.
 	public function getAllByType($table,$type='blog'){
        	$query="SELECT *, content.id AS articleid FROM content
 		JOIN pages ON (pages.articleids=content.id AND pages.pagetype = :type)";
