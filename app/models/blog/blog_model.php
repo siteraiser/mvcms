@@ -55,6 +55,12 @@ class blog_model extends requestHandler{
 		$stmt->execute(array($link)); 
 		return $stmt->fetch(PDO::FETCH_ASSOC);		
 	}
+	public function getContentById($id){
+		$query="SELECT * FROM content WHERE id = ? AND published = 1";
+		$stmt=$this->pdo->prepare($query);
+		$stmt->execute(array($id)); 
+		return $stmt->fetch(PDO::FETCH_ASSOC);		
+	}
 	public function getCategory($category){
 		$query="SELECT * FROM content WHERE category = ? AND published = 1";
 		$stmt=$this->pdo->prepare($query);
