@@ -40,10 +40,11 @@ class content_model extends requestHandler{
 		menutype,
 		content,
 		date,
-		lastupdate
+		lastupdate,
+		dependencies
 		)
 		VALUES
-		(?,?,?,?,?,?,?,?)';			
+		(?,?,?,?,?,?,?,?,?)';			
 		
 		$array=array(
 			$_POST['articlename'],
@@ -53,7 +54,8 @@ class content_model extends requestHandler{
 			$_POST['menutype'],	
 			$_POST['content'],
 			$timestamp,
-			$timestamp
+			$timestamp,
+			$_POST["dependencies"]
 			);				
 			
 			$stmt=$this->pdo->prepare($query);
@@ -75,7 +77,8 @@ class content_model extends requestHandler{
 		type=:type,
 		menutype=:menutype,
 		content=:content,
-		date=:date';
+		date=:date,
+		dependencies=:dependencies';
 		if ($count == 0) {	
 			$query.=", lastupdate=:lastupdate";
 		}
@@ -88,7 +91,8 @@ class content_model extends requestHandler{
 				':type'=>$_POST['type'],		
 				':menutype'=>$_POST['menutype'],	
 				':content'=>$_POST['content'],
-				':date'=>$_POST['date']
+				':date'=>$_POST['date'],
+				':dependencies'=>$_POST["dependencies"]
 			);				
 			if($count == 0){
 				$array[':lastupdate']=$_POST['lastupdate'];
@@ -187,6 +191,7 @@ class content_model extends requestHandler{
 			if ($this->pdo->exec("DELETE FROM content WHERE id = $id")) {
 				return 'Article id:'.$id.' deleted';
 			}
+			$this->deleteAppCaches($id);		
 		}
 		
 	function update_page($id,$articleids, $positions){
@@ -217,6 +222,7 @@ class content_model extends requestHandler{
 				$this->deletePageCache($row['categoryname'],$row['page']);
 			}			
 		}
+		$this->deleteAppCaches($id);	
 	}
 	//Delete pages'	caches on update or delete
 	public function deletePageCache($categoryname,$page){
@@ -229,5 +235,48 @@ class content_model extends requestHandler{
 		}		
 	}	
 
+
+
+		//Un-Caching
+		
+		//Dependent apps cache deletion. "blog" will delete: blog, blog/anycache etc.
+	function deleteAppCaches($id){	
+		$query="SELECT dependencies FROM content
+		WHERE content.id = :id";
+		$stmt=$this->pdo->prepare($query);
+		$stmt->execute(array(':id'=>$id)); 	
+		
+		$count=$stmt->rowCount($result);
+		if ($count > 0) {
+			$row=$stmt->fetch(PDO::FETCH_ASSOC);			
+			$apps = explode(',',$row['dependencies']);
+		}
+
+		$dir = new DirectoryIterator($this->doc_root."/cached");
+		foreach ($dir as $fileinfo) {
+		if($fileinfo != '.' && $fileinfo != '..')
+			$caches[]= pathinfo($fileinfo->getFilename(), PATHINFO_FILENAME);
+		}
+		
+		foreach ($apps as $app) {
+		//delete app base cache
+			if (file_exists($this->doc_root.'cached/'.$app)){
+				unlink($this->doc_root.'cached/'.$app);
+			}	
+			//delete nested caches
+			$compare='cached-'.$app.'-^-';
+			$del_length = strlen('cached-'.$app.'-^-');
+			foreach($caches as $cachefile){
+			
+				$teststem=substr($cachefile, 0, $del_length); 
+				if($compare == $teststem){
+					if (file_exists($this->doc_root.'cached/'.$cachefile)){
+						unlink($this->doc_root.'cached/'.$cachefile);
+					}		
+				}
+			}
+		}
+	
+	}
 	
 }
