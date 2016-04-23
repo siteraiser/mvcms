@@ -58,6 +58,7 @@ CREATE TABLE content (
 	menutype varchar(50) NULL,
 	image varchar(250) NULL,
 	category varchar(100) NULL,
+	dependencies varchar(500) NULL,	
 	PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
