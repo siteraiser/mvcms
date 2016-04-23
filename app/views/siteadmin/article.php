@@ -93,7 +93,8 @@ Type: <select name="type" id="type" class="form-control">
 		
 Date: <input type="text" name="date" value="<?php echo $article['date'];?>">	<br>
 Last Update: <input type="text" name="lastupdate" value="<?php echo $article['lastupdate'];?>">	<br>
-
+Dependent Apps - CSV for caching deletion 
+	<input type="text" name="dependencies" value="<?php echo $article['dependencies']?>"><br>
 
 Published: <input type="checkbox" name="published" <?php echo (@$article['published'] == 1?'checked':'')?> value="<?php echo @$article['published']?>"> 
 
