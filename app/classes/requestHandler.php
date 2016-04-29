@@ -127,7 +127,8 @@ abstract class helpers{
 		return $this->pdo;		
 	}	
 	public function loadModel($path) {
-		$name =	end(explode('/',$path));
+		$var=explode('/',$path);
+		$name =	end($var);
 		$loadname = 'app/models/'.$path.'.php';
 		try {
 
