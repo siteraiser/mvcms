@@ -114,7 +114,7 @@ foreach($loadViews as $key => $value){
 			
 		}else if($value2['type'] == 'agg-pos' AND $loadViews[$key - 1][$key2]['type'] == 'agg-pos' AND key($value) == key($loadViews[$key - 1])		
 		AND $value2['type'] == 'agg-pos' AND ($loadViews[$key + 1][$key2]['type'] !== 'agg-pos' OR key($value) !== key($loadViews[$key + 1]))){
-			$temp[]=$value2['content'];
+			$temp[]=$this->$templatemodel->respImgs($value2['content']);
 			$content['content']=$temp;
 			if(isset($value2['meta'])){	$content['meta'] = $value2['meta'];	}
 			if(isset($value2['title'])){ $content['title'] = $value2['title']; }
