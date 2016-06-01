@@ -1,6 +1,6 @@
 <?php 
 
-class cgsuny_model extends requestHandler{
+class bootstrap4_model extends requestHandler{
 	public function respImgs($html){
 	if(strlen($html)!=0){
 	$html='<div class="dynamic-content">'.$html.'</div>';//
