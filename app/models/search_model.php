@@ -1,16 +1,20 @@
-<?php /* Copyright © 2016 
+<?php /*
+Copyright © 2016 
 	
 	This file is part of PHP-MVCMS.
+
     PHP-MVCMS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
+
     PHP-MVCMS is distributed in the hope that it will be useful,
-    You should have received a copy of the GNU General Public License
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-   along with PHP-MVCMS.  If not, see <http://www.gnu.org/licenses/>.
+
+    You should have received a copy of the GNU General Public License
+    along with PHP-MVCMS.  If not, see <http://www.gnu.org/licenses/>.
 */	
 class search_model extends requestHandler{
 
@@ -57,21 +61,148 @@ class search_model extends requestHandler{
 		}
 	}	
 
+public function getPages($rows){
+
+	$skip=array('header','footer');//'menu',
+		foreach($rows as $row)
+		{	
+			if(isset($row['pageid']) && $row['type'] !='noindex' && !(in_array($row['type'],$skip))){
+				$pages[$row['pageid']][]=$row;
+ /*if not set*/ $pages[$row['pageid']]["headline"]=$row['headline'];
+ 
+			}
+					
+		}
+		
+	//	echo '<pre>',htmlspecialchars(print_r($pages, true)),'</pre>';
+		
+		
+	foreach($pages as $key => $page){	
+		$retpages[$key]['words']=$this->getUniques($page["headline"] . ' ' . $this->strip($this->renderPage($page)));
+	}
+	return $retpages;
+}
+
+
+public function renderPage($results){
+
+$sorted=[];
+$artOrder=explode( ',', $results[0]['articleids']);
+foreach($artOrder as $id){
+	foreach($results as $row){
+		if($row['articleid'] == $id){
+		$row['articleid'];
+			$sorted[] = $row;
+		}		
+	}
+}
+
+
+$articleAssViews=unserialize( $results[0]['positions']);
+
+$used=[];
+foreach($sorted as $rowkey => $article){
+	foreach($articleAssViews as $key => $page){
+		if($article['articleid'] == $page['id']){
+			$aggregate='';
+			if($page['aggregate'] == 'aggregate'){					
+				$aggregate='aggregate';			
+			}else if($page['aggregate'] == 'agg-pos'){
+				$aggregate='agg-pos';			
+			}else{
+				$aggregate='single';
+			}
+				
+			if($article['type'] == 'header'){ 
+				$loadViews[$rowkey][$page['view']]=array('meta'=>$head['meta'],'title'=>$head['title'],'content'=>$article['content']);	
+			}else if($article['type'] == 'menu'){ 
+				$loadViews[$rowkey][$page['view']]=array('content'=>$article['content'],'type'=>$aggregate);
+			}else{
+			$loadViews[$rowkey][$page['view']]['type']=$aggregate;
+			$loadViews[$rowkey][$page['view']]['content']=$article['content'];
+			}
+			unset($articleAssViews[$key]);break;
+		}	
+	}
+}
+
+
+//aggregate
+$temp='';$menutemp='';
+foreach($loadViews as $key => $value){
+	foreach($value as $key2 => $value2){
+
+		if($value2['type'] == 'aggregate' AND $loadViews[$key + 1][$key2]['type'] == 'aggregate' AND key($value) == key($loadViews[$key + 1])){
+			$temp.= $value2['content'];			
+		}else if($value2['type'] == 'aggregate' AND $loadViews[$key - 1][$key2]['type'] == 'aggregate' AND key($value) == key($loadViews[$key - 1])		
+		AND $value2['type'] == 'aggregate' AND ($loadViews[$key + 1][$key2]['type'] !== 'aggregate' OR key($value) !== key($loadViews[$key + 1]))){
+		
+			$content['content']=$temp.$value2['content'];			
+			$pagecontent.=$this->renderView('templates/'.key($value),$content);
+			$temp='';$menutemp='';//Done aggregating this view, this occurance
+	
+
+		}else if($value2['type'] == 'agg-pos' AND $loadViews[$key + 1][$key2]['type'] == 'agg-pos' AND key($value) == key($loadViews[$key + 1])){
+			$temp[]= $value2['content'];
+
+			
+		}else if($value2['type'] == 'agg-pos' AND $loadViews[$key - 1][$key2]['type'] == 'agg-pos' AND key($value) == key($loadViews[$key - 1])		
+		AND $value2['type'] == 'agg-pos' AND ($loadViews[$key + 1][$key2]['type'] !== 'agg-pos' OR key($value) !== key($loadViews[$key + 1]))){
+			$temp[]=$value2['content'];
+			$content['content']=$temp;
+			
+			$pagecontent.=$this->renderView('templates/'.key($value),$content);
+			$temp='';$menutemp='';//Done aggregating this view, this occurance
+		}else{
+			$content['content'] = $value2['content'];	
+			$pagecontent.=$this->renderView('templates/'.key($value),$content);	
+		}
+
+	}
+}
+return  html_entity_decode($pagecontent,ENT_QUOTES);
+}
+public function get_include_contents2($filename,$data) {
+		foreach($data as $key => $value){
+			$$key = $value;
+		}
+		if (is_file('app/views/'.$filename.'.php')) {
+			ob_start();
+	
+			include 'app/views/'.$filename.'.php';
+			return ob_get_clean();
+		}
+		echo $filename . ' is not a valid file!';
+		return false;
+	}	
+public function renderView($view,$data) {	
+		return $this->get_include_contents2($view,$data);		
+	}	
+
+
+
+
 	public function updateSearch(){//Site search update execution starts here, use this function in your mvc application to include articles from the content table.
 	
-	$sql="SELECT *,pages.id AS pageid FROM content
+	$sql="SELECT *,pages.id AS pageid, content.id AS articleid FROM content
 		JOIN pages ON (pages.articleids=content.id AND pages.published = 1 AND content.published = 1
 		) OR ( FIND_IN_SET(content.id, pages.articleids) AND pages.published = 1 AND content.published = 1)";
 
-		$sql.="";
+		$sql.=" ORDER BY content.id ASC;";
 		$stmt=$this->pdo->prepare($sql);
 		$stmt->execute(array());
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		$skip_headline=array('header','menu','footer');
+
+	
+
+		$pages = $this->getPages($rows);
+			
+		//echo '<pre>',htmlspecialchars(print_r($pages, true)),'</pre>';
+		/* or Unrendered results...
+		$skip_headline=array('header','menu','footer');	
 		foreach($rows as $row)
 		{	
-			
+		
 			$content=$this->strip($row['content']);
 			if( $content != ''){	
 				if($row['type'] !='noindex'){					
@@ -87,7 +218,7 @@ class search_model extends requestHandler{
 					$pages[$row['pageid']]['words'] =  $content;
 				}
 			}			
-		}
+		}*/
 		//Get articles
 		$sql="SELECT * FROM content WHERE (type != 'header' AND type != 'footer' AND type != 'default' AND type != 'menu' AND type != 'auto p false' AND type != 'noindex' AND type != '' AND type IS NOT NULL)";//type = article
 		$stmt=$this->pdo->prepare($sql);
@@ -97,7 +228,7 @@ class search_model extends requestHandler{
 		foreach($rows as $row)
 		{	
 			
-			$content=$this->strip($row['content']);
+			$content=$this->strip( html_entity_decode($row['content'],ENT_QUOTES));
 			if( $content != ''){	
 				if($row['type'] !='noindex'){					
 					$content = $this->getUniques( $row['articlename'].' '. $row['description'].' '.$content);
