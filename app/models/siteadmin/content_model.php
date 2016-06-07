@@ -252,7 +252,7 @@ class content_model extends requestHandler{
 			$apps = explode(',',$row['dependencies']);
 		}
 
-		$dir = new DirectoryIterator($this->doc_root."/cached");
+		$dir = new DirectoryIterator($this->doc_root."cached");
 		foreach ($dir as $fileinfo) {
 		if($fileinfo != '.' && $fileinfo != '..')
 			$caches[]= pathinfo($fileinfo->getFilename(), PATHINFO_FILENAME);
